@@ -2,36 +2,26 @@
 from sys import argv
 
 def find_prime_factors(num):
-    factors = []
-    while num % 2 == 0:
-        factors.append(2)
-        num //= 2
-    while num % 3 == 0:
-        factors.append(3)
-        num //= 3
-    factor = 5
-    while factor * factor <= num:
-        while num % factor == 0:
-            factors.append(factor)
-            num //= factor
-        factor += 2
-        while num % factor == 0:
-            factors.append(factor)
-            num //= factor
-        factor += 4
-    if num > 1:
-        factors.append(num)
-    return factors
+  factors = []
+  while num % 2 == 0:
+    factors.append(2)
+    num //= 2
+  while num % 3 == 0:
+    factors.append(3)
+    num //= 3
+  factor = 5
+  while factor * factor <= num:
+    while num % factor == 0:
+      factors.append(factor)
+      num //= factor
+    factor += 4  # Increment by 4 to check only odd potential factors
+  if num > 1:
+    factors.append(num)
+  return factors
 
 with open(argv[1]) as f:
-    for line in f:
-        num = int(line.strip())
-        factors = find_prime_factors(num)
-        if len(factors) == 2:
-            factors.sort()  # Sort the factors
-            print("{}={}*{}".format(num, factors[0], factors[1]))
-        elif len(factors) > 2:
-            factors.sort()
-            print("{}={}*{}".format(num, factors[0], num // factors[0]))
-        else:
-            print("Unable to find prime factors for {}".format(num))
+  for line in f:
+    num = int(line.strip())
+    factors = find_prime_factors(num)
+    factors.sort()  # Sort factors to ensure consistent output
+    print("{}={}*{}".format(num, factors[0], factors[1]))  # Print only the first two prime factors
