@@ -24,4 +24,8 @@ with open(argv[1]) as f:
     num = int(line.strip())
     factors = find_prime_factors(num)
     factors.sort()  # Sort factors to ensure consistent output
-    print("{}={}*{}".format(num, factors[0], factors[1]))  # Print only the first two prime factors
+
+    if len(factors) >= 2:
+      print("{}={}*{}".format(num, factors[0], factors[1]))  # Print only the first two prime factors
+    else:
+      print("Number {} has less than two prime factors".format(num))
