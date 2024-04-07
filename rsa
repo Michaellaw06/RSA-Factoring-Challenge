@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from sys import argv
-import gmpy2
 
 def find_prime_factors(num):
     factors = []
