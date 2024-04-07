@@ -15,22 +15,25 @@ def is_prime(n):
         i += 6
     return True
 
-def factorize(num):
+def find_prime_factors(num):
     factors = []
     divisor = 2
     while num != 1:
-        while num % divisor == 0:
+        if is_prime(num):
+            factors.append(num)
+            break
+        if num % divisor == 0:
             factors.append(divisor)
             num //= divisor
-        divisor += 1
+        else:
+            divisor += 1
     return factors
 
 with open(argv[1]) as f:
     for line in f:
         num = int(line.strip())
-        factors = factorize(num)
-        print("{}=".format(num), end='')
+        factors = find_prime_factors(num)
         if len(factors) == 2:
-            print("*".join(map(str, factors)))
+            print("{}={}*{}".format(num, factors[0], factors[1]))
         else:
-            print("Unable to find prime factors.")
+            print("Unable to find prime factors for {}".format(num))
