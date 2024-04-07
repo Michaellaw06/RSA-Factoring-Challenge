@@ -1,32 +1,27 @@
 #!/usr/bin/python3
 from sys import argv
-
-def is_prime(n):
-    if n <= 1:
-        return False
-    elif n <= 3:
-        return True
-    elif n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return False
-        i += 6
-    return True
+import gmpy2
 
 def find_prime_factors(num):
     factors = []
-    divisor = 2
-    while num != 1:
-        if is_prime(num):
-            factors.append(num)
-            break
-        if num % divisor == 0:
-            factors.append(divisor)
-            num //= divisor
-        else:
-            divisor += 1
+    while num % 2 == 0:
+        factors.append(2)
+        num //= 2
+    while num % 3 == 0:
+        factors.append(3)
+        num //= 3
+    factor = 5
+    while factor * factor <= num:
+        while num % factor == 0:
+            factors.append(factor)
+            num //= factor
+        factor += 2
+        while num % factor == 0:
+            factors.append(factor)
+            num //= factor
+        factor += 4
+    if num > 1:
+        factors.append(num)
     return factors
 
 with open(argv[1]) as f:
