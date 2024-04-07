@@ -28,6 +28,7 @@ with open(argv[1]) as f:
         num = int(line.strip())
         factors = find_prime_factors(num)
         if len(factors) == 2:
+            factors.sort()  # Sort the factors
             print("{}={}*{}".format(num, factors[0], factors[1]))
         else:
             print("Unable to find prime factors for {}".format(num))
