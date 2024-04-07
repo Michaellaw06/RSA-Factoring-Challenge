@@ -19,13 +19,20 @@ def find_prime_factors(num):
     factors.append(num)
   return factors
 
+def is_perfect_square(num):
+  # Check if the square root is an integer
+  return int(num**0.5) ** 2 == num
+
 with open(argv[1]) as f:
   for line in f:
     num = int(line.strip())
     factors = find_prime_factors(num)
-    factors.sort()  # Sort factors to ensure consistent output
-
-    if len(factors) >= 2:
-      print("{}={}*{}".format(num, factors[0], factors[1]))  # Print only the first two prime factors
+    if len(factors) == 1 and is_perfect_square(num):
+      # Perfect square case: print first factor twice
+      sqrt_num = int(num**0.5)
+      print(f"{num}={sqrt_num}*{sqrt_num}")
+    elif len(factors) >= 2:
+      factors.sort()  # Sort factors to ensure consistent output
+      print("{}={}*{}".format(num, factors[0], factors[1]))
     else:
       print("Number {} has less than two prime factors".format(num))
