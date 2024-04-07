@@ -28,9 +28,9 @@ def factorize(num):
 with open(argv[1]) as f:
     for line in f:
         num = int(line.strip())
+        factors = factorize(num)
         print("{}=".format(num), end='')
-        if is_prime(num):
-            print("{}*1".format(num))
-        else:
-            factors = factorize(num)
+        if len(factors) == 2:
             print("*".join(map(str, factors)))
+        else:
+            print("Unable to find prime factors.")
