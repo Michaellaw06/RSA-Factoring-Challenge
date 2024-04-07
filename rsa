@@ -30,5 +30,8 @@ with open(argv[1]) as f:
         if len(factors) == 2:
             factors.sort()  # Sort the factors
             print("{}={}*{}".format(num, factors[0], factors[1]))
+        elif len(factors) > 2:
+            factors.sort()
+            print("{}={}*{}".format(num, factors[0], num // factors[0]))
         else:
             print("Unable to find prime factors for {}".format(num))
